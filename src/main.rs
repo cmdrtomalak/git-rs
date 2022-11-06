@@ -77,7 +77,7 @@ fn serial_object(filename: &str) -> Result<Vec<u8>, io::Error> {
     object_data.push(32); // ascii "space"
     object_data.append(&mut amt.to_string().as_bytes().to_vec());
     // object_data.append(&mut "\x00".as_bytes().to_vec());
-    object_data.push(0); // ascii "zero"
+    object_data.push(0); // ascii "null"
     object_data.append(&mut content.to_vec());
 
     Ok(object_data)
