@@ -73,9 +73,11 @@ fn serial_object(filename: &str) -> Result<Vec<u8>, io::Error> {
     let amt = fhandle.read_to_end(&mut content).unwrap_or(default) as u8;
 
     let mut object_data: Vec<u8> = b"blob".to_vec();
-    object_data.append(&mut "\x20".as_bytes().to_vec());
+    // object_data.append(&mut "\x20".as_bytes().to_vec());
+    object_data.push(32); // ascii "space"
     object_data.append(&mut amt.to_string().as_bytes().to_vec());
-    object_data.append(&mut "\x00".as_bytes().to_vec());
+    // object_data.append(&mut "\x00".as_bytes().to_vec());
+    object_data.push(0); // ascii "zero"
     object_data.append(&mut content.to_vec());
 
     Ok(object_data)
